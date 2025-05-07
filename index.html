@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>相談記録自動生成AI</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #444;
+    }
+    textarea, button {
+      width: 100%;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    textarea {
+      height: 120px;
+      padding: 10px;
+    }
+    .output {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-top: 15px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>相談記録自動生成AI</h1>
+  <p>以下に相談内容を入力してください（自由記述）:</p>
+  <textarea id="input" placeholder="例：母親からの虐待が疑われる状況..."></textarea>
+  <button onclick="generate()">記録を自動生成</button>
+
+  <div class="output" id="output"></div>
+
+  <script>
+    function generate() {
+      const text = document.getElementById("input").value;
+      if (!text.trim()) {
+        document.getElementById("output").innerText = "相談内容を入力してください。";
+        return;
+      }
+      const output = `
+【相談者情報】
+- 匿名（入力省略）
+
+【相談概要】
+${text}
+
+【現在の状況】
+AI推定: 虐待リスクがある可能性があります。今後の観察が必要です。
+
+【対応内容】
+- 傾聴を実施。本人の不安に寄り添う対応を実施。
+- 今後も継続的な相談が必要と判断。
+
+【次回対応予定】
+- 1週間以内に再度の相談を予定。
+- 地域支援機関との連携も検討。
+
+※この記録はAIによって自動生成されたものであり、専門家による確認が必要です。
+      `;
+      document.getElementById("output").innerText = output;
+    }
+  </script>
+</body>
+</html>
