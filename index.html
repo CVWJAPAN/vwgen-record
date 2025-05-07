@@ -1,54 +1,106 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CVWGEN 相談支援AI</title>
   <style>
     body {
+      font-family: sans-serif;
+      background: #f9fafe;
       margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(to bottom right, #ffe0f0, #e0f7fa);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-
-    .content {
       padding: 20px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      max-width: 90%;
     }
-
     h1 {
-      font-size: 1.8em;
-      color: #333;
+      text-align: center;
+      color: #2c3e50;
     }
-
-    p {
-      font-size: 1em;
-      color: #555;
+    textarea, button {
+      width: 100%;
+      font-size: 16px;
+      margin-top: 10px;
+      box-sizing: border-box;
+    }
+    textarea {
+      height: 130px;
+      padding: 10px;
+    }
+    button {
+      padding: 12px;
+      background: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 6px;
       margin-top: 10px;
     }
-
-    @media (min-width: 768px) {
-      h1 {
-        font-size: 2.5em;
-      }
-      p {
-        font-size: 1.2em;
-      }
+    .output {
+      margin-top: 20px;
+      background: #ffffff;
+      border: 1px solid #ccc;
+      padding: 15px;
+      white-space: pre-wrap;
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
-  <div class="content">
-    <h1>CVWGEN 相談支援AI</h1>
-    <p>子どもや保護者、支援者をやさしくサポートするAIです。</p>
-  </div>
+  <h1>CVWGEN 相談支援AI</h1>
+  <p>相談内容を入力してください：</p>
+  <textarea id="input" placeholder="例：子どもが登校を拒否し、家庭内で緊張が高まっている..."></textarea>
+  <button onclick="generate()">記録を生成</button>
+
+  <div class="output" id="output"></div>
+
+  <script>
+    function generate() {
+      const text = document.getElementById("input").value.trim();
+      if (!text) {
+        document.getElementById("output").innerText = "相談内容を入力してください。";
+        return;
+      }
+
+      const replies = [
+        "ご相談いただきありがとうございます。とても勇気のいる行動だったと思います。",
+        "そのような状況の中で、ここに来てくれたことが何よりも大切です。",
+        "一人で抱え込まず、まずは話してくださったことに心から感謝します。",
+        "お子さんやご家族のことを大切に思うお気持ちが伝わってきました。",
+        "不安や戸惑いの中で、しっかりと声を届けてくれて本当にありがとうございます。",
+        "状況は簡単ではないかもしれませんが、一緒に考えていきましょう。",
+        "大丈夫です。この相談をきっかけに、支援の道がひらけます。"
+      ];
+
+      const selectedReply = replies[Math.floor(Math.random() * replies.length)];
+
+      const output = `
+【AIからの返信】
+${selectedReply}
+「${text}」というご相談内容を受けて、以下のような支援が考えられます。
+
+【相談内容】
+${text}
+
+【法的観点】
+- 児童福祉法 第1条：児童は心身ともに健やかに育成される権利を持ちます。
+- 同法 第33条の6：保護者の同意がなくても、危険がある場合は一時保護が可能です。
+- 児童虐待防止法 第2条：心理的虐待、身体的虐待、性的虐待、ネグレクトが定義されています。
+- 同法 第6条：すべての人に通告義務があり、通報による責任は問われません。
+
+【支援提案】
+- 保護者へ傾聴と心理的支援を行う
+- お子さんの不安・心身状態のアセスメントを心理士と連携して実施
+- 必要に応じて、児童相談所や学校、地域機関と連携を図る
+- 家庭内の安全が確保されない場合は、一時保護やケース会議を検討
+
+【次回対応】
+- 支援方針をチームで共有
+- 保護者面談の再設定
+- リスク継続時は法的措置の判断へ
+
+※この記録はAIにより自動生成された参考情報です。専門職の判断と照合してください。
+      `;
+
+      document.getElementById("output").innerText = output;
+    }
+  </script>
 </body>
 </html>
